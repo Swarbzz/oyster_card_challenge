@@ -23,3 +23,13 @@ card.balance <= 0
 card.top_up(10)
 card.balance <= 10 
 card.top_up(90) <= raise error "above max balance"
+
+In order to pay for my journey
+As a customer
+I need my fare deducted from my card
+
+card = OysterCard.new
+card.top_up(10)
+card.balance <= 10
+card.deduct(6)
+card.balance <= 4
