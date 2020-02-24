@@ -33,3 +33,16 @@ card.top_up(10)
 card.balance <= 10
 card.deduct(6)
 card.balance <= 4
+
+In order to get through the barriers.
+As a customer
+I need to touch in and out.
+
+card = OysterCard.new
+card.touch_out <= should raise error
+card.balance <= 0
+card.touch_in <= should raise error
+card.top_up(10)
+card.balance <= 10
+card.touch_in <= in_journey should be true
+card.touch_out <= should deduct from balace and in_journey should be false

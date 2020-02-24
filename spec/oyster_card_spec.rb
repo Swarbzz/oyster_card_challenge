@@ -23,4 +23,17 @@ describe OysterCard do
     expect{ subject.deduct 1}.to change{ subject.balance }.by -1
   end
 
+  it "is in journey" do
+    expect { subject.in_journey? }.to raise_error "You haven't touched in"
+  end
+
+  it "raises error when touching in with no balance" do
+    expect { subject.touch_in }.to raise_error "No credit on card"
+  end
+
+  it "allow in journey if balance more than 0" do
+    subject.top_up 10
+    expect(subject.touch_in).to be_in_journey
+  end
+
 end
