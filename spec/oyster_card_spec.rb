@@ -31,7 +31,7 @@ describe OysterCard do
   end
 
   it "returns false when touched out" do
-    subject.touch_out
+    subject.touch_out(station)
     expect subject.in_journey? == false
   end
 
@@ -43,7 +43,7 @@ describe OysterCard do
   it "deducts the fee from the card" do
    subject.top_up 10
    subject.touch_in(station)
-   expect{ subject.touch_out }.to change{ subject.balance }.by(-OysterCard::MIN_CHARGE)
+   expect{ subject.touch_out(station) }.to change{ subject.balance }.by(-OysterCard::MIN_CHARGE)
   end
 
   it "Stores the entry station" do

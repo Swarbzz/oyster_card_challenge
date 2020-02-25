@@ -3,13 +3,14 @@ class OysterCard
   MAX_BALANCE = 90
   MIN_CHARGE = 1
 
-  attr_reader :balance, :in_use, :fare, :entry_station
+  attr_reader :balance, :in_use, :fare, :entry_station, :history
 
   def initialize
     @balance = 0
     @fare = fare.to_i
     @in_use = false
     @entry_station = entry_station
+    @history = []
   end
 
   def top_up(value)
@@ -25,11 +26,12 @@ class OysterCard
   def touch_in(station)
     raise "No credit on card" if balance < MIN_CHARGE
     @in_use = true
+    @entry_station = station
   end
 
-  def touch_out
+  def touch_out(station)
     deduct(MIN_CHARGE)
-    @in_journey = false
+    @history << {in: entry_station, exit: station}
     @entry_station = nil
   end
 
