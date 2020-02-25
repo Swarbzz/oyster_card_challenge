@@ -22,13 +22,6 @@ describe OysterCard do
     end
   end
 
-  describe "#deduct" do
-    it "deducts money from card" do
-      oystercard.top_up(10)
-      expect{ oystercard.deduct(1) }.to change{ oystercard.balance }.by(-1)
-    end
-  end
-
   describe "#in_journey?" do
     it "is not in journey" do
       expect(oystercard).not_to be_in_journey
@@ -46,8 +39,9 @@ describe OysterCard do
       expect { oystercard.touch_in }.to raise_error "No credit on card"
     end
 
-    it "allows journey if balance more than 0" do
-      oystercard.top_up(10)
+    it "allows journey if balance more than minimum balance" do
+      min_balance = OysterCard::MIN_BALANCE
+      oystercard.top_up(min_balance)
       expect { oystercard.touch_in }.to_not raise_error
     end
   end
@@ -63,6 +57,12 @@ describe OysterCard do
       oystercard.touch_in
       oystercard.touch_out
       expect(oystercard).not_to be_in_journey
+    end
+
+    it "deducts fare from balance" do
+      oystercard.top_up(10)
+      oystercard.touch_in
+      expect { oystercard.touch_out }.to change { oystercard.balance }.by(-OysterCard::MIN_CHARGE)
     end
   end
 end

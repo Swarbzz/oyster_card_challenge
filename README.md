@@ -47,9 +47,11 @@ In order to get through the barriers.
 As a customer
 I need to touch in and out.
 ```
+```
 In order to pay for my journey
 As a customer
 I need to have the minimum amount (£1) for a single journey.
+```
 ```
 card = OysterCard.new
 card.touch_out <= should raise error
@@ -59,4 +61,16 @@ card.top_up(10)
 card.balance <= 10
 card.touch_in <= in_journey should be true
 card.touch_out <= should deduct from balace and in_journey should be false
+```
+```
+In order to pay for my journey
+As a customer
+When my journey is complete, I need the correct amount deducted from my card
+```
+```
+card = OysterCard.new
+card.top_up(10)
+card.touch_in
+card.touch_out <= should deduct min charge of 1
+card.balance <= should be 9
 ```

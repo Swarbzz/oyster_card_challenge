@@ -2,6 +2,7 @@ class OysterCard
 
   MAX_BALANCE = 90
   MIN_BALANCE = 1
+  MIN_CHARGE = 1
 
   attr_reader :balance, :in_journey
 
@@ -15,10 +16,6 @@ class OysterCard
     @balance += value
   end
 
-  def deduct(value)
-    @balance -= value
-  end
-
   def in_journey?
     @in_journey
   end
@@ -30,7 +27,14 @@ class OysterCard
 
   def touch_out
     fail "Cannot touch out, not in journey" if @in_journey == false
+    deduct(MIN_CHARGE)
     @in_journey = false
+  end
+
+  private
+
+  def deduct(value)
+    @balance -= value
   end
 
 end
