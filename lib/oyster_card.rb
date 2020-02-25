@@ -1,12 +1,14 @@
 class OysterCard
-
+  
   MAX_BALANCE = 90
+  MIN_CHARGE = 1
 
-  attr_reader :balance, :in_use
+  attr_reader :balance, :in_use, :fare
 
   def initialize
     @balance = 0
-    @in_use = in_use
+    @fare = fare.to_i
+    @in_use = false
   end
 
   def top_up(value)
@@ -14,16 +16,26 @@ class OysterCard
     @balance += value
   end
 
-  def deduct(value)
-    @balance -= value
-  end
-
   def in_journey?
-    fail "You haven't touched in" unless in_use
+    @in_use
   end
 
   def touch_in
-    fail "No credit on card" if balance == 0
+    if @balance >= MIN_CHARGE
+      @in_use = true
+    else
+      raise "No credit on card"
+    end
   end
 
+  def touch_out
+    deduct(MIN_CHARGE)
+    @in_journey = false
+  end
+
+  private
+
+  def deduct(fee)
+    @balance -= fee
+  end
 end
