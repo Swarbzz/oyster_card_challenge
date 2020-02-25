@@ -42,7 +42,7 @@ describe OysterCard do
   end
 
   describe "#touch_in" do
-    it "raises error when touching in with no balance" do
+    it "raises error when balance less than minimum" do
       expect { oystercard.touch_in }.to raise_error "No credit on card"
     end
 

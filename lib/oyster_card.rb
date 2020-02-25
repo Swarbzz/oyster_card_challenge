@@ -1,6 +1,7 @@
 class OysterCard
 
   MAX_BALANCE = 90
+  MIN_BALANCE = 1
 
   attr_reader :balance, :in_journey
 
@@ -23,7 +24,7 @@ class OysterCard
   end
 
   def touch_in
-    fail "No credit on card" if balance == 0
+    fail "No credit on card" if balance < MIN_BALANCE
     @in_journey = true
   end
 
