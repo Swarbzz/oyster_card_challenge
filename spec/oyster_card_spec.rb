@@ -51,4 +51,15 @@ describe OysterCard do
     subject.touch_in(station)
     expect subject.entry_station == station
   end
-end
+
+  it "checks card has an empty list of journeys" do
+    expect(subject.history).to eq []
+  end
+
+  it "checks that touching in and out creates one journey" do
+    subject.top_up(10)
+    subject.touch_in(station)
+    subject.touch_out(station)
+    expect(subject.history).to eq [in: station, exit: station]
+  end
+end 
