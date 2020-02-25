@@ -2,6 +2,8 @@ require 'oyster_card'
 
 describe OysterCard do
 
+  let(:station) { double :station }
+
   # it { is_expected.to respond_to(:balance) }
 
   it "has a balance" do
@@ -35,12 +37,18 @@ describe OysterCard do
 
   it "raises error when touching in with no balance" do
     subject.instance_variable_set(:@balance, 0)
-    expect{ subject.touch_in }.to raise_error("No credit on card")
+    expect{ subject.touch_in(station) }.to raise_error("No credit on card")
   end
 
   it "deducts the fee from the card" do
    subject.top_up 10
-   subject.touch_in
+   subject.touch_in(station)
    expect{ subject.touch_out }.to change{ subject.balance }.by(-OysterCard::MIN_CHARGE)
+  end
+
+  it "Stores the entry station" do
+    subject.top_up(10)
+    subject.touch_in(station)
+    expect subject.entry_station == station
   end
 end
