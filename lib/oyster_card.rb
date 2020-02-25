@@ -31,7 +31,7 @@ class OysterCard
 
   def touch_out(station)
     deduct(MIN_CHARGE)
-    @history << {in: entry_station, exit: station}
+    @history << { in: entry_station, exit: station }
     @entry_station = nil
   end
 

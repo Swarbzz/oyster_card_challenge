@@ -11,13 +11,13 @@ describe OysterCard do
   end
 
   it "gets a topup" do
-    expect{ subject.top_up 1}.to change{ subject.balance }.by 1
+    expect { subject.top_up 1}.to change{ subject.balance }.by 1
   end
 
   it "raises error when maxed out" do
     max_balance = OysterCard::MAX_BALANCE
     subject.top_up(max_balance)
-    expect{ subject.top_up 1 }.to raise_error("Card maxed out")
+    expect { subject.top_up 1 }.to raise_error("Card maxed out")
   end
 
   # it "deducts money from card" do
@@ -37,13 +37,13 @@ describe OysterCard do
 
   it "raises error when touching in with no balance" do
     subject.instance_variable_set(:@balance, 0)
-    expect{ subject.touch_in(station) }.to raise_error("No credit on card")
+    expect { subject.touch_in(station) }.to raise_error("No credit on card")
   end
 
   it "deducts the fee from the card" do
    subject.top_up 10
    subject.touch_in(station)
-   expect{ subject.touch_out(station) }.to change{ subject.balance }.by(-OysterCard::MIN_CHARGE)
+   expect { subject.touch_out(station) }.to change{ subject.balance }.by(-OysterCard::MIN_CHARGE)
   end
 
   it "Stores the entry station" do
