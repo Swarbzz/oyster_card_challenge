@@ -27,12 +27,13 @@ describe OysterCard do
 
   it "returns true when touched in" do
     subject.instance_variable_set(:@balance, 10)
-    expect subject.in_journey? == true
+    subject.touch_in(station)
+    expect(subject.in_journey?).to eq true
   end
 
   it "returns false when touched out" do
     subject.touch_out(station)
-    expect subject.in_journey? == false
+    expect(subject.in_journey?).to eq false
   end
 
   it "raises error when touching in with no balance" do
