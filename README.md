@@ -74,3 +74,25 @@ card.touch_in
 card.touch_out <= should deduct min charge of 1
 card.balance <= should be 9
 ```
+```
+In order to pay for my journey
+As a customer
+I need to know where I've travelled from
+```
+```
+card = OysterCard.new
+card.top_up(10)
+card.touch_in(station)
+card.entry_station <= station
+```
+```
+In order to know where I have been
+As a customer
+I want to see all my previous trips
+```
+```
+card = OysterCard.new
+card.top_up(10)
+card.touch_in(station)
+card.touch_out(station)
+card.history <= [{entry_station: station, exit_station: station}]
