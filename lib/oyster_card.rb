@@ -31,8 +31,6 @@ class OysterCard
     @in_journey = false
   end
 
-  private
-
   def deduct(value)
     @balance -= value
   end
