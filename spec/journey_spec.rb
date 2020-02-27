@@ -8,10 +8,36 @@ describe Journey do
   end
 
   it "uses fare" do
-    expect(subject.fare). to eq Journey::FARE
+    expect(subject.fare).to eq Journey::FARE
   end
 
-  it "returns station when finishing" do
+  it "returns self when finishing" do
     expect(subject.finish(station)).to eq(subject)
+  end
+
+  subject { described_class.new(entry_station: station) }
+
+  it "has an entry_station" do
+    expect(subject.entry_station).to eq station
+  end
+
+  it "gives a penalty fare in there is not exit station" do
+    expect(subject.fare).to eq Journey::FARE
+  end
+
+  context 'give an exit station' do
+    let(:other_station) { double :other_sation }
+
+    before do
+      subject.finish(other_station)
+    end
+
+    it "knows if a journey is complete" do
+      expect(subject).to be_complete
+    end
+
+    it "figures out the fare" do
+      expect(subject.fare).to eq 6
+    end
   end
 end

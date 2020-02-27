@@ -5,19 +5,20 @@ class Journey
 
   FARE = 6
 
-  attr_accessor :complete, :entry_station
+  attr_accessor :complete, :entry_station, :other_station
 
-  def initialize
+  def initialize(entry_info)
     @complete = complete
-    @entry_station = entry_station
+    @entry_station = entry_info[:entry_station]
+    @other_station = other_station
   end
 
   def complete?
-    nil
+    true unless @entry_station && @other_station == false
   end
 
   def fare
-    6
+    FARE
   end
 
   def finish(station)
