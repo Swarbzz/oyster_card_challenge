@@ -10,4 +10,8 @@ describe Journey do
   it "uses fare" do
     expect(subject.fare). to eq Journey::FARE
   end
+
+  it "returns station when finishing" do
+    expect(subject.finish(station)).to eq(subject)
+  end
 end

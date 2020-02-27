@@ -13,14 +13,15 @@ class Journey
   end
 
   def complete?
-    false
+    nil
   end
 
   def fare
     6
   end
 
-  def finsh
+  def finish(station)
+    station = self
   end
 
 end
