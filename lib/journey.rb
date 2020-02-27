@@ -17,9 +17,10 @@ class Journey
   end
 
   def fare
+    6
   end
 
-  def finsh?
+  def finsh
   end
 
 end
