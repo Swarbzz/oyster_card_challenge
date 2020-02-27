@@ -3,11 +3,10 @@ class OysterCard
   MAX_BALANCE = 90
   MIN_CHARGE = 1
 
-  attr_reader :balance, :in_use, :fare, :entry_station, :history
+  attr_reader :balance, :in_use, :entry_station, :history
 
   def initialize
     @balance = 0
-    @fare = fare.to_i
     @in_use = false
     @entry_station = entry_station
     @history = []
