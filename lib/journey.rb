@@ -1,5 +1,6 @@
 require_relative "oyster_card"
 require_relative "station"
+require_relative "JourneyLog"
 
 class Journey
 

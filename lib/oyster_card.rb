@@ -1,4 +1,6 @@
 require_relative "journey"
+require_relative "JourneyLog"
+require_relative "station"
 
 class OysterCard
   
@@ -27,7 +29,7 @@ class OysterCard
 
   def touch_in(station)
     raise "No credit on card" if balance < MIN_CHARGE
-    @journey = Journey.new(entry_station: station)
+    @journey = JourneyLog.new(Journey.new(entry_station: station))
     @in_use = true
     @entry_station = station
   end
