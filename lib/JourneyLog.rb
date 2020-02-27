@@ -15,11 +15,13 @@ class JourneyLog
     journey_class.new(entry_station: station)
   end
 
-  def finish
+  def finish(station)
     journey_class.new(exit_station: station)
+    @current_journey = nil
   end
 
   def journeys
+    @journeys << journey_class.new
     @journeys.dup
   end
 
