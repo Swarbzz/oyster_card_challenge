@@ -14,7 +14,7 @@ class Journey
   end
 
   def complete?
-    true unless @entry_station && @other_station == false
+    @entry_station && @other_station
   end
 
   def fare

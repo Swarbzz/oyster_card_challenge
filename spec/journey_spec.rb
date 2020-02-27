@@ -26,7 +26,7 @@ describe Journey do
   end
 
   context 'give an exit station' do
-    let(:other_station) { double :other_sation }
+    let(:other_station) { double :other_station }
 
     before do
       subject.finish(other_station)
